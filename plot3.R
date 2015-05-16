@@ -9,8 +9,10 @@ plotTitle = "Total Baltimore City Emissions PM2.5 by Type"
 plotYLab = "Total PM2.5 Emissions (tons)"
 plotXLab = "Year"
 plotType = "l"
+plotYlim=c(0, max(plot_data$Emissions)+max(plot_data$Emissions)/5)
+
 ##ggplot(plot_data, aes(x=as.factor(year),y=Emissions,group=type)) + geom_line() + geom_point() 
-plot<- ggplot(plot_data, aes(x=as.factor(year),y=Emissions,fill=type)) + geom_bar(stat="identity") + facet_grid(type ~ .) +
+plot<- ggplot(plot_data, aes(x=as.factor(year),y=Emissions,fill=type)) + geom_bar(stat="identity") + ylim(plotYlim) + facet_grid(type ~ .) +
   geom_text(aes(label=format(Emissions,digits=2,nsmall=2),vjust=-0.2)) +  labs(x=plotXLab, y=plotYLab, title=plotTitle)
 print(plot)
 dev.off()
